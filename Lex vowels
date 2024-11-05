@@ -1,0 +1,23 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+^[aeiouAEIOU][a-zA-Z]* { printf("String starts with a vowel: %s\n", yytext); }
+.|\n                    { /* Ignore other strings */ }
+%%
+
+int main(int argc, char **argv) {
+    if (argc > 1) {
+        FILE *file = fopen(argv[1], "r");
+        if (!file) {
+            perror("fopen");
+            return 1;
+        }
+        yyin = file;
+    }
+
+    yylex();
+
+    return 0;
+}
