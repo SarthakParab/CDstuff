@@ -1,0 +1,20 @@
+C program before optimization:
+#include <stdio.h>
+
+int main() {
+    int a = 5;
+    int b = 10;
+    int c = a + b * 2;
+    printf("Result: %d\n", c);
+    return 0;
+}
+	In this program, the expression b * 2 is a constant expression and can be evaluated at compile time. After applying constant folding, the optimized program looks like this:
+#include <stdio.h>
+
+int main() {
+    int a = 5;
+    int b = 10;
+    int c = a + 20; // b * 2 is replaced with 20
+    printf("Result: %d\n", c);
+    return 0;
+}
