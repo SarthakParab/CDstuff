@@ -1,0 +1,40 @@
+This is an example of generating target code from intermediate code using a basic three-address code (TAC) representation. This example will convert TAC to assembly-like instructions.
+Let's assume we have the following intermediate code:
+t1 = a + b
+t2 = t1 * c
+d = t2
+
+We'll write a program to convert this intermediate code into target code (assembly-like instructions).
+#include <stdio.h>
+#include <string.h>
+
+void generate_target_code(char *intermediate_code[], int n) {
+    for (int i = 0; i < n; i++) {
+        char op[3], arg1[10], arg2[10], result[10];
+        sscanf(intermediate_code[i], "%s = %s %s %s", result, arg1, op, arg2);
+
+        if (strcmp(op, "+") == 0) {
+            printf("ADD %s, %s\n", arg1, arg2);
+            printf("MOV %s, AX\n", result);
+        } else if (strcmp(op, "*") == 0) {
+            printf("MUL %s, %s\n", arg1, arg2);
+            printf("MOV %s, AX\n", result);
+        } else {
+            printf("MOV %s, %s\n", result, arg1);
+        }
+    }
+}
+
+int main() {
+    char *intermediate_code[] = {
+        "t1 = a + b",
+        "t2 = t1 * c",
+        "d = t2"
+    };
+    int n = sizeof(intermediate_code) / sizeof(intermediate_code[0]);
+
+    generate_target_code(intermediate_code, n);
+
+    return 0;
+}
+This program reads the intermediate code and generates corresponding target code instructions. The generate_target_code function parses each line of the intermediate code and generates the appropriate assembly-like instructions.
