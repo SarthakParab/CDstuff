@@ -1,5 +1,5 @@
 %{
-#include <stdio.h>
+    #include <stdio.h>
 %}
 
 %%
@@ -8,10 +8,13 @@
 .|\n                                      { /* Ignore other tokens */ }
 %%
 
-int main(int argc, char **argv) {
-    if (argc > 1) {
+int main(int argc, char **argv) 
+{
+    if (argc > 1) 
+    {
         FILE *file = fopen(argv[1], "r");
-        if (!file) {
+        if (!file) 
+        {
             perror("fopen");
             return 1;
         }
